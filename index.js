@@ -1,23 +1,20 @@
+// Import library
 const dotenv = require("dotenv");
 dotenv.config();
-
 const express = require("express");
-
 const routes = require("./routes");
 const db = require("./helpers/db");
-
 const port = process.env.PORT || 3000;
-
 const uri = process.env.MONGO_URI;
 
 async function main() {
   try {
-    //mastikan database connect
+    //Connect database
     await db.openDBConnection(uri, {});
 
     const app = express();
-
-    app.use(express.json()); // biar kita bisa ambil request body
+    // Agar dapat mengambil request body
+    app.use(express.json()); 
     app.use(routes);
 
     app.listen(port, () => {
@@ -27,5 +24,5 @@ async function main() {
     console.log("main:", error);
   }
 }
-
-main(); // menjalankan main
+// menjalankan fungsi main
+main(); 
